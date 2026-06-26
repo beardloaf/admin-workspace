@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Calendar, Plus } from "lucide-react";
+import { ChevronDown, Calendar, Plus, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CARD, CARD_BASE, stopDrag } from "@/components/ui-kit/card";
 import { StatusBadge } from "@/components/ui-kit/status-badge";
@@ -11,14 +11,16 @@ import { BambooMark, OktaMark } from "@/components/ui-kit/brand-marks";
 export function CompanyCard({
   expanded,
   onToggle,
+  onEdit,
 }: {
   expanded: boolean;
   onToggle: () => void;
+  onEdit: () => void;
 }) {
   return (
     <div
       onClick={onToggle}
-      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-3")}
+      className={cn(CARD, "relative flex cursor-pointer flex-col p-6")}
     >
       {/* Title stays at the top; expanding just adds white space below. */}
       <div className="flex items-center gap-2.5">
@@ -48,6 +50,22 @@ export function CompanyCard({
           />
         </button>
       </div>
+
+      {expanded && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit();
+          }}
+          onPointerDown={stopDrag}
+          onMouseDown={stopDrag}
+          aria-label="Edit company"
+          className="no-drag absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-700 transition-colors hover:bg-neutral-200"
+        >
+          <Pencil className="h-4 w-4" strokeWidth={2} />
+        </button>
+      )}
     </div>
   );
 }
@@ -58,7 +76,7 @@ export function AccountManagerCard() {
   return (
     <div className={cn(CARD, "flex flex-col p-6")}>
       <h2 className="text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-900">
-        Unlock the full Engine experience
+        Unlock the power of Engine
       </h2>
       <p className="mt-2 text-sm leading-snug text-neutral-500">
         Your account manager is ready to optimize Engine for your team.
@@ -67,9 +85,12 @@ export function AccountManagerCard() {
       <div className="flex-1" />
 
       <div className="flex items-center gap-3">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3aa0e3] text-sm font-bold text-white">
-          MI
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://randomuser.me/api/portraits/women/68.jpg"
+          alt="Maya Iyer"
+          className="h-11 w-11 shrink-0 rounded-full object-cover"
+        />
         <span className="min-w-0">
           <span className="block text-base font-bold leading-tight text-neutral-900">
             Maya Iyer
@@ -130,7 +151,7 @@ export function IntegrationsCard() {
           onClick={() => {}}
           onPointerDown={stopDrag}
           onMouseDown={stopDrag}
-          className="no-drag shrink-0 rounded-full bg-neutral-100 px-4 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+          className="no-drag shrink-0 rounded-xl bg-neutral-100 px-4 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
         >
           See all
         </button>

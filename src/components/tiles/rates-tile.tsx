@@ -1,7 +1,11 @@
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BENTO_CARD } from "@/components/ui-kit/card";
-import { AvatarStack } from "@/components/ui-kit/avatar-stack";
+import {
+  AvisMark,
+  EnterpriseMark,
+  HertzMark,
+} from "@/components/ui-kit/brand-marks";
 
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
@@ -18,14 +22,10 @@ export function RatesTile({ onOpen }: { onOpen: () => void }) {
         Negotiated rates
       </h2>
 
-      <div className="mt-4">
-        <AvatarStack
-          avatars={[
-            { initials: "A", color: "#d4002a" },
-            { initials: "E", color: "#0a7a3b" },
-            { initials: "H", color: "#111827" },
-          ]}
-        />
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        <AvisMark />
+        <EnterpriseMark />
+        <HertzMark />
       </div>
 
       <div className="flex-1" />

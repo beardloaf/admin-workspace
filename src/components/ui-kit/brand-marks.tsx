@@ -14,7 +14,7 @@ function LogoChip({
 }) {
   return (
     <span
-      className={`flex h-9 items-center rounded-lg border border-neutral-200 px-3 text-sm font-bold tracking-tight ${className}`}
+      className={`flex h-8 items-center rounded-lg border border-neutral-200 px-2 text-xs font-bold tracking-tight ${className}`}
     >
       {children}
     </span>

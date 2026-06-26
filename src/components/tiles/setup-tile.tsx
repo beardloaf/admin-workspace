@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { BENTO_CARD } from "@/components/ui-kit/card";
+import { CARD } from "@/components/ui-kit/card";
 
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
@@ -13,7 +13,7 @@ export function SetupTile() {
   const c = 2 * Math.PI * r;
   const offset = c * (1 - PCT / 100);
   return (
-    <div className={cn(BENTO_CARD, "flex flex-col p-6")}>
+    <div className={cn(CARD, "flex flex-col p-6")}>
       <span className={EYEBROW}>Account setup</span>
 
       <div className="flex flex-1 items-center gap-5">

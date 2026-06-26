@@ -20,7 +20,8 @@ import { SetupTile } from "@/components/tiles/setup-tile";
 import { AddTile } from "@/components/tiles/add-tile";
 import { DetailSheet } from "@/components/rates-sheet";
 import {
-  SEED_CELLS,
+  LEFT_CELLS,
+  RIGHT_CELLS,
   COMPANY_COLLAPSED_H,
   COMPANY_EXPANDED_H,
   type SeedCell,
@@ -31,18 +32,63 @@ import "react-resizable/css/styles.css";
 
 type DetailConfig = { title: string; description?: string; showSave: boolean };
 
-export function Workspace() {
-  const [cells, setCells] = useState<SeedCell[]>(SEED_CELLS);
-  const [detail, setDetail] = useState<DetailConfig | null>(null);
-
+/** A single drag context. Items can only be dragged within this grid. */
+function Grid({
+  cells,
+  cols,
+  onLayoutChange,
+  render,
+  className,
+}: {
+  cells: SeedCell[];
+  cols: number;
+  onLayoutChange: (next: Layout) => void;
+  render: (cell: SeedCell) => React.ReactNode;
+  className?: string;
+}) {
   const { width, containerRef, mounted } = useContainerWidth({
     measureBeforeMount: true,
   });
-
   const layout = useMemo<Layout>(
     () => cells.map(({ i, x, y, w, h }) => ({ i, x, y, w, h })),
     [cells],
   );
+
+  return (
+    <div ref={containerRef} className={className}>
+      {mounted && (
+        <ResponsiveGridLayout
+          className="layout"
+          width={width}
+          layouts={{
+            lg: layout,
+            md: layout,
+            sm: layout,
+            xs: layout,
+            xxs: layout,
+          }}
+          breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+          cols={{ lg: cols, md: cols, sm: cols, xs: cols, xxs: cols }}
+          rowHeight={12}
+          margin={[24, 24]}
+          containerPadding={[0, 0]}
+          resizeConfig={{ enabled: false }}
+          dragConfig={{ enabled: true, cancel: ".no-drag" }}
+          onLayoutChange={onLayoutChange}
+        >
+          {cells.map((cell) => (
+            <div key={cell.i}>{render(cell)}</div>
+          ))}
+        </ResponsiveGridLayout>
+      )}
+    </div>
+  );
+}
+
+export function Workspace() {
+  const [leftCells, setLeftCells] = useState<SeedCell[]>(LEFT_CELLS);
+  const [rightCells, setRightCells] = useState<SeedCell[]>(RIGHT_CELLS);
+  const [detail, setDetail] = useState<DetailConfig | null>(null);
 
   function openRates() {
     setDetail({
@@ -51,7 +97,6 @@ export function Workspace() {
       showSave: true,
     });
   }
-
   function openPolicies() {
     setDetail({
       title: "Travel Policies",
@@ -59,7 +104,6 @@ export function Workspace() {
       showSave: true,
     });
   }
-
   function openInvite() {
     setDetail({
       title: "Invite a teammate",
@@ -67,7 +111,13 @@ export function Workspace() {
       showSave: true,
     });
   }
-
+  function openCompany() {
+    setDetail({
+      title: "Company details",
+      description: "Edit your organization's details.",
+      showSave: true,
+    });
+  }
   // The dashed "+" card and "See all features" both open this.
   function openAdd() {
     setDetail({
@@ -77,9 +127,9 @@ export function Workspace() {
     });
   }
 
-  // Turner switcher: expand/collapse pushes the cards below it down.
+  // Turner switcher: expand/collapse pushes the cards below it (right grid) down.
   function toggleCompany() {
-    setCells((prev) =>
+    setRightCells((prev) =>
       prev.map((c) =>
         c.i === "company"
           ? {
@@ -94,13 +144,14 @@ export function Workspace() {
     );
   }
 
-  function handleLayoutChange(next: Layout) {
-    setCells((prev) =>
-      prev.map((c) => {
-        const l = next.find((n) => n.i === c.i);
-        return l ? { ...c, x: l.x, y: l.y, w: l.w, h: l.h } : c;
-      }),
-    );
+  function persist(setCells: typeof setLeftCells) {
+    return (next: Layout) =>
+      setCells((prev) =>
+        prev.map((c) => {
+          const l = next.find((n) => n.i === c.i);
+          return l ? { ...c, x: l.x, y: l.y, w: l.w, h: l.h } : c;
+        }),
+      );
   }
 
   function renderTile(cell: SeedCell) {
@@ -115,15 +166,16 @@ export function Workspace() {
         return <RatesTile onOpen={openRates} />;
       case "rewards":
         return <RewardsTile />;
-      case "setup":
-        return <SetupTile />;
       case "add":
         return <AddTile onAdd={openAdd} />;
+      case "setup":
+        return <SetupTile />;
       case "company":
         return (
           <CompanyCard
             expanded={cell.h > COMPANY_COLLAPSED_H}
             onToggle={toggleCompany}
+            onEdit={openCompany}
           />
         );
       case "accountManager":
@@ -149,38 +201,27 @@ export function Workspace() {
         <button
           type="button"
           onClick={openAdd}
-          className="shrink-0 rounded-full bg-black px-7 py-3.5 text-lg font-semibold text-white transition-transform hover:scale-[1.02]"
+          className="shrink-0 rounded-2xl bg-black px-6 py-3 text-base font-semibold text-white transition-transform hover:scale-[1.02]"
         >
           See all features
         </button>
       </header>
 
-      <div ref={containerRef}>
-        {mounted && (
-          <ResponsiveGridLayout
-            className="layout"
-            width={width}
-            layouts={{
-              lg: layout,
-              md: layout,
-              sm: layout,
-              xs: layout,
-              xxs: layout,
-            }}
-            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 18, md: 18, sm: 18, xs: 18, xxs: 18 }}
-            rowHeight={12}
-            margin={[24, 24]}
-            containerPadding={[0, 0]}
-            resizeConfig={{ enabled: false }}
-            dragConfig={{ enabled: true, cancel: ".no-drag" }}
-            onLayoutChange={handleLayoutChange}
-          >
-            {cells.map((cell) => (
-              <div key={cell.i}>{renderTile(cell)}</div>
-            ))}
-          </ResponsiveGridLayout>
-        )}
+      <div className="flex gap-6">
+        <Grid
+          className="min-w-0 flex-[2]"
+          cells={leftCells}
+          cols={12}
+          onLayoutChange={persist(setLeftCells)}
+          render={renderTile}
+        />
+        <Grid
+          className="min-w-0 flex-[1]"
+          cells={rightCells}
+          cols={6}
+          onLayoutChange={persist(setRightCells)}
+          render={renderTile}
+        />
       </div>
 
       <DetailSheet

@@ -52,16 +52,18 @@ export function ProgressRing({
 export function MiniBar({
   value,
   className,
+  barClassName,
 }: {
   value: number; // 0..100
   className?: string;
+  barClassName?: string;
 }) {
   return (
     <div
       className={cn("h-2 w-full overflow-hidden rounded-full bg-neutral-100", className)}
     >
       <div
-        className="h-full rounded-full bg-neutral-900"
+        className={cn("h-full rounded-full bg-neutral-900", barClassName)}
         style={{ width: `${Math.min(Math.max(value, 0), 100)}%` }}
       />
     </div>

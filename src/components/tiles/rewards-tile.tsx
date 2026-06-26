@@ -16,14 +16,6 @@ export function RewardsTile() {
         Silver Status
       </h2>
 
-      <div className="-mx-6 mt-4 flex items-center justify-between border-t border-neutral-200 px-6 pt-4">
-        <span className="flex items-center gap-1.5 text-[0.9375rem] font-semibold text-neutral-900">
-          Share with employees
-          <Info className="h-[18px] w-[18px] text-neutral-400" strokeWidth={2} />
-        </span>
-        <Toggle defaultOn />
-      </div>
-
       <div className="flex-1" />
 
       <div>
@@ -31,7 +23,18 @@ export function RewardsTile() {
           <span className="text-neutral-500">Progress to Gold</span>
           <span className="font-medium text-neutral-700">7.4K / 10K</span>
         </div>
-        <MiniBar value={74} />
+        <MiniBar
+          value={74}
+          barClassName="bg-[linear-gradient(90deg,#000000,#d4af37)]"
+        />
+      </div>
+
+      <div className="-mx-6 mt-4 flex items-center justify-between border-t border-neutral-200 px-6 pt-4">
+        <span className="flex items-center gap-1.5 text-[0.9375rem] font-semibold text-neutral-900">
+          Share with team
+          <Info className="h-[18px] w-[18px] text-neutral-400" strokeWidth={2} />
+        </span>
+        <Toggle defaultOn />
       </div>
     </div>
   );

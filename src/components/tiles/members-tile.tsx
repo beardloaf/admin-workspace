@@ -39,14 +39,13 @@ export function MembersTile({ onAdd }: { onAdd: () => void }) {
           ]}
           extra={8}
         />
-        <span className="text-sm text-neutral-500">2 newly added</span>
         <button
           type="button"
           onClick={onAdd}
           onPointerDown={stopDrag}
           onMouseDown={stopDrag}
           aria-label="Add new member"
-          className="no-drag ml-auto flex items-center gap-1 rounded-full bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+          className="no-drag ml-auto flex h-9 items-center gap-1 rounded-xl bg-neutral-100 px-3 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
         >
           <Plus className="h-4 w-4" strokeWidth={2.25} />
           Add new

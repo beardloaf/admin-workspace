@@ -150,3 +150,25 @@
   transition: none;
   z-index: 20;
 }
+
+/* Add-module card: rounded dashed border that marches on hover */
+.add-dash {
+  x: 1px;
+  y: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  rx: 23px;
+  ry: 23px;
+  fill: none;
+  stroke: #d4d4d4;
+  stroke-width: 2;
+  stroke-dasharray: 10 8;
+}
+.group:hover .add-dash {
+  animation: dash-march 1.6s linear infinite;
+}
+@keyframes dash-march {
+  to {
+    stroke-dashoffset: -36;
+  }
+}
