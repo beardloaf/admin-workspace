@@ -1,45 +1,12 @@
 "use client";
 
-import { type PointerEvent, type MouseEvent } from "react";
-import {
-  ChevronDown,
-  Calendar,
-  AlertTriangle,
-  AlertCircle,
-  Asterisk,
-  Plus,
-} from "lucide-react";
+import { ChevronDown, Calendar, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CARD, CARD_BASE, stopDrag } from "@/components/ui-kit/card";
+import { StatusBadge } from "@/components/ui-kit/status-badge";
+import { BambooMark, OktaMark } from "@/components/ui-kit/brand-marks";
 
-// Right-column panels: no hover scale (unlike the bento cards).
-const CARD_BASE =
-  "w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)]";
-// Most cards fill their grid cell; CARD_BASE alone hugs its content height.
-const CARD = "h-full " + CARD_BASE;
-
-function stopDrag(e: PointerEvent | MouseEvent) {
-  e.stopPropagation();
-}
-
-/* ───────────── See all features ───────────── */
-
-export function SeeAllBar() {
-  return (
-    <div className="flex h-full w-full items-center justify-end">
-      <button
-        type="button"
-        onClick={() => {}}
-        onPointerDown={stopDrag}
-        onMouseDown={stopDrag}
-        className="no-drag rounded-full bg-black px-7 py-3.5 text-lg font-semibold text-white transition-transform hover:scale-[1.02]"
-      >
-        See all features
-      </button>
-    </div>
-  );
-}
-
-/* ───────────── Company switcher ───────────── */
+/* ───────────── Company switcher (expandable) ───────────── */
 
 export function CompanyCard({
   expanded,
@@ -51,7 +18,7 @@ export function CompanyCard({
   return (
     <div
       onClick={onToggle}
-      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-3")}
+      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-2.5")}
     >
       {/* Title stays at the top; expanding just adds white space below. */}
       <div className="flex items-center gap-2.5">
@@ -85,9 +52,9 @@ export function CompanyCard({
   );
 }
 
-/* ───────────── Unlock the full Engine experience ───────────── */
+/* ───────────── Account manager ───────────── */
 
-export function UnlockCard() {
+export function AccountManagerCard() {
   return (
     <div className={cn(CARD, "flex flex-col p-6")}>
       <h2 className="text-xl font-extrabold leading-snug tracking-tight text-neutral-900">
@@ -127,33 +94,16 @@ export function UnlockCard() {
 
 /* ───────────── Connected Integrations ───────────── */
 
-type IntegrationStatus = "error" | "incomplete";
-
-function StatusBadge({ status }: { status: IntegrationStatus }) {
-  if (status === "error") {
-    return (
-      <span className="flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1.5 text-[0.9375rem] font-medium text-orange-700">
-        <AlertTriangle className="h-[18px] w-[18px]" strokeWidth={2} />
-        Error
-      </span>
-    );
-  }
-  return (
-    <span className="flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1.5 text-[0.9375rem] font-medium text-sky-700">
-      <AlertCircle className="h-[18px] w-[18px]" strokeWidth={2} />
-      Incomplete
-    </span>
-  );
-}
-
 function IntegrationRow({
   icon,
   name,
   status,
+  label,
 }: {
   icon: React.ReactNode;
   name: string;
-  status: IntegrationStatus;
+  status: "attention" | "notset";
+  label: string;
 }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5">
@@ -163,7 +113,7 @@ function IntegrationRow({
       <span className="flex-1 text-lg font-semibold text-neutral-900">
         {name}
       </span>
-      <StatusBadge status={status} />
+      <StatusBadge status={status} label={label} />
     </div>
   );
 }
@@ -189,17 +139,15 @@ export function IntegrationsCard() {
       <div className="mt-4 flex flex-col gap-3">
         <IntegrationRow
           name="BambooHR"
-          status="error"
-          icon={
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#73c41d] text-base font-bold lowercase text-white">
-              b
-            </span>
-          }
+          status="attention"
+          label="Error"
+          icon={<BambooMark />}
         />
         <IntegrationRow
           name="Okta"
-          status="incomplete"
-          icon={<Asterisk className="h-6 w-6 text-neutral-900" strokeWidth={2.5} />}
+          status="notset"
+          label="Incomplete"
+          icon={<OktaMark />}
         />
       </div>
 
@@ -215,22 +163,4 @@ export function IntegrationsCard() {
       </button>
     </div>
   );
-}
-
-/* ───────────── kind → component ───────────── */
-
-export type PanelKind = "seeAll" | "company" | "unlock" | "integrations";
-
-export function Panel({ kind }: { kind: PanelKind }) {
-  switch (kind) {
-    case "seeAll":
-      return <SeeAllBar />;
-    case "unlock":
-      return <UnlockCard />;
-    case "integrations":
-      return <IntegrationsCard />;
-    // "company" is rendered directly by the workspace (it needs expand state).
-    default:
-      return null;
-  }
 }

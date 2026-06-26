@@ -1,142 +1,26 @@
-import type { ReactNode } from "react";
-import type { PanelKind } from "@/components/panels";
-
-export type ModuleTone = "default" | "accent" | "muted" | "gradient";
-export type ModuleVariant = "filled" | "cta" | "accent";
-
-export type ModuleToggle = {
-  label: string;
-  defaultOn: boolean;
-  muted?: boolean;
-};
-
-export type ModuleData = {
-  eyebrow?: string;
-  title: string;
-  tone?: ModuleTone;
-  body?: ReactNode;
-  toggle?: ModuleToggle;
-  variant?: ModuleVariant;
-};
-
 export type SeedCell = {
   i: string;
-  data: ModuleData | null; // null = empty "+" module (unless `custom` is set)
-  custom?: PanelKind; // bespoke third-column panel
   x: number;
   y: number;
   w: number;
   h: number;
 };
 
-// 12-column grid, three columns of four. rowHeight is 12px (margin 24px), so a
-// height unit ≈ 36px — fine enough for a short Turner bar that can expand.
-// Standard module = h10 (336px). Columns 1 & 2 hold the bento modules; column 3
-// (x: 8) holds the account / integrations panels.
+// 3 columns of 4 (12-col grid), rowHeight 12 + margin 24 → a height unit ≈ 36px.
+// Cols 1–2 hold the birdseye bento tiles; col 3 (x: 8) holds the account panels.
 export const SEED_CELLS: SeedCell[] = [
-  {
-    i: "basic",
-    x: 0,
-    y: 0,
-    w: 4,
-    h: 10,
-    data: {
-      eyebrow: "4 Departments",
-      title: "Basic",
-      body: (
-        <>
-          We start every account with default depts. and you can{" "}
-          <strong>add / remove</strong> any time.
-        </>
-      ),
-    },
-  },
-  {
-    i: "flexible",
-    x: 4,
-    y: 0,
-    w: 4,
-    h: 10,
-    data: {
-      eyebrow: "3 Travel Policies",
-      title: "Flexible",
-      tone: "accent",
-      body: (
-        <>
-          We set your policies to flexible, keeping it easy to book in major
-          cities. <strong>Make an update.</strong>
-        </>
-      ),
-    },
-  },
-  {
-    i: "team",
-    x: 0,
-    y: 10,
-    w: 4,
-    h: 10,
-    data: {
-      eyebrow: "Travelers & Teams",
-      title: "It’s just you.",
-      tone: "muted",
-      variant: "cta",
-      body: (
-        <>
-          Even if you’re booking for everyone, <strong>add your people</strong>{" "}
-          to make your life easier.
-        </>
-      ),
-    },
-  },
-  {
-    i: "accent",
-    x: 4,
-    y: 10,
-    w: 4,
-    h: 10,
-    data: {
-      title: "",
-      variant: "accent",
-    },
-  },
-  {
-    i: "rewards",
-    x: 0,
-    y: 20,
-    w: 4,
-    h: 10,
-    data: {
-      eyebrow: "1% Rewards",
-      title: "Silver Status",
-      tone: "gradient",
-      body: <>Every account starts here and we let your team earn points.</>,
-      toggle: { label: "Share with employees", defaultOn: true },
-    },
-  },
-  {
-    i: "rates",
-    x: 4,
-    y: 20,
-    w: 4,
-    h: 10,
-    data: {
-      eyebrow: "Your Rates",
-      title: "Setup custom rates",
-      tone: "muted",
-      variant: "cta",
-      body: (
-        <>Add your hotels, flights, cars rates or ask us how to get cheaper rates.</>
-      ),
-      toggle: { label: "Negotiated rates", defaultOn: false, muted: true },
-    },
-  },
-  { i: "empty-1", x: 0, y: 30, w: 4, h: 10, data: null },
-  { i: "empty-2", x: 4, y: 30, w: 4, h: 10, data: null },
+  // ── Bento (cols 1 & 2) ──
+  { i: "members", x: 0, y: 0, w: 4, h: 10 },
+  { i: "policies", x: 4, y: 0, w: 4, h: 10 },
+  { i: "departments", x: 0, y: 10, w: 4, h: 9 },
+  { i: "rates", x: 4, y: 10, w: 4, h: 7 },
+  { i: "rewards", x: 0, y: 19, w: 4, h: 8 },
+  { i: "setup", x: 4, y: 17, w: 4, h: 6 },
 
   // ── Third column ──
-  { i: "company", x: 8, y: 0, w: 4, h: 2, data: null, custom: "company" },
-  { i: "unlock", x: 8, y: 2, w: 4, h: 10, data: null, custom: "unlock" },
-  { i: "integrations", x: 8, y: 12, w: 4, h: 9, data: null, custom: "integrations" },
+  { i: "company", x: 8, y: 0, w: 4, h: 2 },
+  { i: "accountManager", x: 8, y: 2, w: 4, h: 10 },
+  { i: "integrations", x: 8, y: 12, w: 4, h: 9 },
 ];
 
 // Collapsed / expanded heights for the Turner company switcher.

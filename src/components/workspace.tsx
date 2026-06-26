@@ -6,38 +6,32 @@ import {
   useContainerWidth,
   type Layout,
 } from "react-grid-layout";
-import { BentoCell } from "@/components/bento-cell";
-import { Panel, CompanyCard } from "@/components/panels";
-import { FeatureSheet } from "@/components/feature-sheet";
+import {
+  CompanyCard,
+  AccountManagerCard,
+  IntegrationsCard,
+} from "@/components/panels";
+import { MembersTile } from "@/components/tiles/members-tile";
+import { DepartmentsTile } from "@/components/tiles/departments-tile";
+import { PoliciesTile } from "@/components/tiles/policies-tile";
+import { RatesTile } from "@/components/tiles/rates-tile";
+import { RewardsTile } from "@/components/tiles/rewards-tile";
+import { SetupTile } from "@/components/tiles/setup-tile";
 import { DetailSheet } from "@/components/rates-sheet";
-import { FEATURE_MAP, type FeatureType } from "@/lib/features";
 import {
   SEED_CELLS,
   COMPANY_COLLAPSED_H,
   COMPANY_EXPANDED_H,
-  type ModuleData,
+  type SeedCell,
 } from "@/lib/seed-modules";
-import type { PanelKind } from "@/components/panels";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
-type Cell = {
-  i: string;
-  data: ModuleData | null;
-  custom?: PanelKind;
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-};
-
 type DetailConfig = { title: string; description?: string; showSave: boolean };
 
 export function Workspace() {
-  const [cells, setCells] = useState<Cell[]>(SEED_CELLS);
-  const [activeCellId, setActiveCellId] = useState<string | null>(null);
-  const [sheetOpen, setSheetOpen] = useState(false);
+  const [cells, setCells] = useState<SeedCell[]>(SEED_CELLS);
   const [detail, setDetail] = useState<DetailConfig | null>(null);
 
   const { width, containerRef, mounted } = useContainerWidth({
@@ -49,43 +43,20 @@ export function Workspace() {
     [cells],
   );
 
-  function handleAdd(id: string) {
-    setActiveCellId(id);
-    setSheetOpen(true);
+  function openRates() {
+    setDetail({
+      title: "Your Rates",
+      description: "Set up your custom rates.",
+      showSave: true,
+    });
   }
 
-  function handleSelect(feature: FeatureType) {
-    const def = FEATURE_MAP[feature];
-    setCells((prev) =>
-      prev.map((c) =>
-        c.i === activeCellId
-          ? {
-              ...c,
-              data: {
-                eyebrow: "New Module",
-                title: def.name,
-                body: def.description,
-              },
-            }
-          : c,
-      ),
-    );
-    setSheetOpen(false);
-    setActiveCellId(null);
-  }
-
-  // CTA tiles open a side sheet — "Your Rates" has a Save button, the others
-  // open a blank sheet with no footer button.
-  function handleCtaOpen(id: string) {
-    if (id === "rates") {
-      setDetail({
-        title: "Your Rates",
-        description: "Set up your custom rates.",
-        showSave: true,
-      });
-    } else {
-      setDetail({ title: "It’s just you.", showSave: false });
-    }
+  function openPolicies() {
+    setDetail({
+      title: "Travel Policies",
+      description: "Adjust who each policy applies to.",
+      showSave: true,
+    });
   }
 
   // Turner switcher: expand/collapse pushes the cards below it down.
@@ -114,6 +85,36 @@ export function Workspace() {
     );
   }
 
+  function renderTile(cell: SeedCell) {
+    switch (cell.i) {
+      case "members":
+        return <MembersTile />;
+      case "departments":
+        return <DepartmentsTile />;
+      case "policies":
+        return <PoliciesTile onOpen={openPolicies} />;
+      case "rates":
+        return <RatesTile onOpen={openRates} />;
+      case "rewards":
+        return <RewardsTile />;
+      case "setup":
+        return <SetupTile />;
+      case "company":
+        return (
+          <CompanyCard
+            expanded={cell.h > COMPANY_COLLAPSED_H}
+            onToggle={toggleCompany}
+          />
+        );
+      case "accountManager":
+        return <AccountManagerCard />;
+      case "integrations":
+        return <IntegrationsCard />;
+      default:
+        return null;
+    }
+  }
+
   return (
     <>
       <div ref={containerRef}>
@@ -138,33 +139,11 @@ export function Workspace() {
             onLayoutChange={handleLayoutChange}
           >
             {cells.map((cell) => (
-              <div key={cell.i}>
-                {cell.custom === "company" ? (
-                  <CompanyCard
-                    expanded={cell.h > COMPANY_COLLAPSED_H}
-                    onToggle={toggleCompany}
-                  />
-                ) : cell.custom ? (
-                  <Panel kind={cell.custom} />
-                ) : (
-                  <BentoCell
-                    id={cell.i}
-                    data={cell.data}
-                    onAdd={handleAdd}
-                    onCtaOpen={handleCtaOpen}
-                  />
-                )}
-              </div>
+              <div key={cell.i}>{renderTile(cell)}</div>
             ))}
           </ResponsiveGridLayout>
         )}
       </div>
-
-      <FeatureSheet
-        open={sheetOpen}
-        onOpenChange={setSheetOpen}
-        onSelect={handleSelect}
-      />
 
       <DetailSheet
         open={!!detail}
