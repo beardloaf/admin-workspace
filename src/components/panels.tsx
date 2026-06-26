@@ -57,7 +57,7 @@ export function CompanyCard({
 export function AccountManagerCard() {
   return (
     <div className={cn(CARD, "flex flex-col p-6")}>
-      <h2 className="text-xl font-extrabold leading-snug tracking-tight text-neutral-900">
+      <h2 className="text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-900">
         Unlock the full Engine experience
       </h2>
       <p className="mt-2 text-sm leading-snug text-neutral-500">
@@ -122,7 +122,7 @@ export function IntegrationsCard() {
   return (
     <div className={cn(CARD_BASE, "flex flex-col p-6")}>
       <div className="flex items-center justify-between gap-2">
-        <span className="whitespace-nowrap text-xl font-extrabold tracking-tight text-neutral-900">
+        <span className="whitespace-nowrap text-2xl font-medium tracking-[-0.02em] text-neutral-900">
           Connected Integrations
         </span>
         <button

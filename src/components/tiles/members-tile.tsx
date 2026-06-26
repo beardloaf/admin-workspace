@@ -1,5 +1,6 @@
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { BENTO_CARD } from "@/components/ui-kit/card";
+import { BENTO_CARD, stopDrag } from "@/components/ui-kit/card";
 import { StatusBadge } from "@/components/ui-kit/status-badge";
 import { Chip } from "@/components/ui-kit/chip";
 import { AvatarStack } from "@/components/ui-kit/avatar-stack";
@@ -7,11 +8,11 @@ import { AvatarStack } from "@/components/ui-kit/avatar-stack";
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
 
-export function MembersTile() {
+export function MembersTile({ onAdd }: { onAdd: () => void }) {
   return (
     <div className={cn(BENTO_CARD, "flex flex-col p-6")}>
       <div className="flex items-start justify-between gap-3">
-        <span className={EYEBROW}>Members</span>
+        <span className={EYEBROW}>Team</span>
         <StatusBadge status="complete" />
       </div>
 
@@ -39,6 +40,17 @@ export function MembersTile() {
           extra={8}
         />
         <span className="text-sm text-neutral-500">2 newly added</span>
+        <button
+          type="button"
+          onClick={onAdd}
+          onPointerDown={stopDrag}
+          onMouseDown={stopDrag}
+          aria-label="Add new member"
+          className="no-drag ml-auto flex items-center gap-1 rounded-full bg-neutral-100 px-3 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+        >
+          <Plus className="h-4 w-4" strokeWidth={2.25} />
+          Add new
+        </button>
       </div>
     </div>
   );

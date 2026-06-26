@@ -1,11 +1,7 @@
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BENTO_CARD } from "@/components/ui-kit/card";
-import { StatusBadge } from "@/components/ui-kit/status-badge";
-import {
-  AvisMark,
-  EnterpriseMark,
-  HertzMark,
-} from "@/components/ui-kit/brand-marks";
+import { AvatarStack } from "@/components/ui-kit/avatar-stack";
 
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
@@ -16,25 +12,28 @@ export function RatesTile({ onOpen }: { onOpen: () => void }) {
       onClick={onOpen}
       className={cn(BENTO_CARD, "flex cursor-pointer flex-col p-6")}
     >
-      <div className="flex items-start justify-between gap-3">
-        <span className={EYEBROW}>Rates</span>
-        <StatusBadge status="attention" />
-      </div>
+      <span className={EYEBROW}>Rates</span>
 
       <h2 className="mt-3 text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-900">
         Negotiated rates
       </h2>
 
-      <div className="mt-4 flex flex-wrap gap-2">
-        <AvisMark />
-        <EnterpriseMark />
-        <HertzMark />
+      <div className="mt-4">
+        <AvatarStack
+          avatars={[
+            { initials: "A", color: "#d4002a" },
+            { initials: "E", color: "#0a7a3b" },
+            { initials: "H", color: "#111827" },
+          ]}
+        />
       </div>
 
-      <p className="mt-4 text-sm text-neutral-500">
-        3 providers ·{" "}
-        <span className="font-semibold text-neutral-900">add hotels</span>
-      </p>
+      <div className="flex-1" />
+
+      <div className="-mx-6 mt-5 flex items-center justify-center gap-2 border-t border-neutral-200 px-6 pt-4 text-[0.9375rem] font-semibold text-neutral-900">
+        <Plus className="h-[18px] w-[18px]" strokeWidth={2.25} />
+        Add hotels
+      </div>
     </div>
   );
 }

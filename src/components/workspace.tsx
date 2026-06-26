@@ -60,6 +60,15 @@ export function Workspace() {
     });
   }
 
+  function openInvite() {
+    setDetail({
+      title: "Invite a teammate",
+      description: "Add people to your workspace.",
+      showSave: true,
+    });
+  }
+
+  // The dashed "+" card and "See all features" both open this.
   function openAdd() {
     setDetail({
       title: "Add a module",
@@ -97,7 +106,7 @@ export function Workspace() {
   function renderTile(cell: SeedCell) {
     switch (cell.i) {
       case "members":
-        return <MembersTile />;
+        return <MembersTile onAdd={openInvite} />;
       case "departments":
         return <DepartmentsTile />;
       case "policies":
@@ -128,6 +137,24 @@ export function Workspace() {
 
   return (
     <>
+      <header className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
+            Workspace
+          </h1>
+          <p className="mt-1 text-sm text-neutral-500">
+            Click a + to add a module. Drag modules to rearrange your dashboard.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={openAdd}
+          className="shrink-0 rounded-full bg-black px-7 py-3.5 text-lg font-semibold text-white transition-transform hover:scale-[1.02]"
+        >
+          See all features
+        </button>
+      </header>
+
       <div ref={containerRef}>
         {mounted && (
           <ResponsiveGridLayout
@@ -141,7 +168,7 @@ export function Workspace() {
               xxs: layout,
             }}
             breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-            cols={{ lg: 12, md: 12, sm: 12, xs: 6, xxs: 6 }}
+            cols={{ lg: 18, md: 18, sm: 18, xs: 18, xxs: 18 }}
             rowHeight={12}
             margin={[24, 24]}
             containerPadding={[0, 0]}

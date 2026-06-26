@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { BENTO_CARD } from "@/components/ui-kit/card";
-import { StatusBadge } from "@/components/ui-kit/status-badge";
 
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
@@ -8,10 +7,7 @@ const EYEBROW =
 export function DepartmentsTile() {
   return (
     <div className={cn(BENTO_CARD, "flex flex-col p-6")}>
-      <div className="flex items-start justify-between gap-2">
-        <span className={EYEBROW}>Depts</span>
-        <StatusBadge status="complete" label="Done" />
-      </div>
+      <span className={EYEBROW}>Departments</span>
 
       <div className="flex-1" />
 

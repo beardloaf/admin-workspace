@@ -25,7 +25,7 @@ export function SetupTile() {
               r={r}
               fill="none"
               stroke="#f0f0f0"
-              strokeWidth={12}
+              strokeWidth={8}
             />
             <circle
               cx={60}
@@ -33,7 +33,7 @@ export function SetupTile() {
               r={r}
               fill="none"
               stroke="#111111"
-              strokeWidth={12}
+              strokeWidth={8}
               strokeLinecap="round"
               strokeDasharray={c}
               strokeDashoffset={offset}

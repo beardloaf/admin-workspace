@@ -28,7 +28,7 @@ export function DetailSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="flex flex-col rounded-l-2xl shadow-2xl sm:max-w-md"
+        className="flex flex-col rounded-2xl shadow-2xl sm:max-w-md data-[side=right]:inset-y-5 data-[side=right]:right-5 data-[side=right]:h-auto"
       >
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
