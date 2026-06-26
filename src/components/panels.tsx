@@ -20,7 +20,11 @@ export function CompanyCard({
   return (
     <div
       onClick={onToggle}
-      className={cn(CARD, "relative flex cursor-pointer flex-col p-6")}
+      className={cn(
+        CARD,
+        "relative flex cursor-pointer flex-col p-6",
+        expanded ? "justify-start" : "justify-center",
+      )}
     >
       {/* Title stays at the top; expanding just adds white space below. */}
       <div className="flex items-center gap-2.5">

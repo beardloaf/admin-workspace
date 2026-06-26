@@ -7,7 +7,7 @@ const EYEBROW =
 export function DepartmentsTile() {
   return (
     <div className={cn(BENTO_CARD, "flex flex-col p-6")}>
-      <span className={EYEBROW}>Departments</span>
+      <span className={EYEBROW}>Organization</span>
 
       <div className="flex-1" />
 

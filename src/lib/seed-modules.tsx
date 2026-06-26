@@ -13,9 +13,9 @@ export type SeedCell = {
 export const LEFT_CELLS: SeedCell[] = [
   { i: "members", x: 0, y: 0, w: 6, h: 10 },
   { i: "policies", x: 6, y: 0, w: 6, h: 10 },
-  { i: "departments", x: 0, y: 10, w: 4, h: 8 },
-  { i: "rates", x: 4, y: 10, w: 4, h: 8 },
-  { i: "rewards", x: 8, y: 10, w: 4, h: 8 },
+  { i: "rates", x: 0, y: 10, w: 4, h: 8 },
+  { i: "rewards", x: 4, y: 10, w: 4, h: 8 },
+  { i: "departments", x: 8, y: 10, w: 4, h: 8 },
   { i: "add", x: 0, y: 18, w: 12, h: 5 },
 ];
 

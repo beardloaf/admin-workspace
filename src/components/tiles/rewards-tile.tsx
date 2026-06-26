@@ -18,6 +18,7 @@ export function RewardsTile() {
 
       <div className="flex-1" />
 
+      {/* progress bar — 24px (mt-6 below) matches the card's side padding */}
       <div>
         <div className="mb-1.5 flex items-center justify-between text-sm">
           <span className="text-neutral-500">Progress to Gold</span>
@@ -25,13 +26,13 @@ export function RewardsTile() {
         </div>
         <MiniBar
           value={74}
-          barClassName="bg-[linear-gradient(90deg,#000000,#d4af37)]"
+          barClassName="bg-[linear-gradient(90deg,#5a5a5a,#d4af37)]"
         />
       </div>
 
-      <div className="-mx-6 mt-4 flex items-center justify-between border-t border-neutral-200 px-6 pt-4">
+      <div className="-mx-6 -mb-6 mt-6 flex items-center justify-between border-t border-neutral-200 px-6 py-4">
         <span className="flex items-center gap-1.5 text-[0.9375rem] font-semibold text-neutral-900">
-          Share with team
+          Share w/ team
           <Info className="h-[18px] w-[18px] text-neutral-400" strokeWidth={2} />
         </span>
         <Toggle defaultOn />
