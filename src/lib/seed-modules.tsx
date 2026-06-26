@@ -37,7 +37,7 @@ export const SEED_CELLS: SeedCell[] = [
     x: 0,
     y: 0,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       eyebrow: "4 Departments",
       title: "Basic",
@@ -54,7 +54,7 @@ export const SEED_CELLS: SeedCell[] = [
     x: 4,
     y: 0,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       eyebrow: "3 Travel Policies",
       title: "Flexible",
@@ -70,9 +70,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "team",
     x: 0,
-    y: 7,
+    y: 5,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       eyebrow: "Travelers & Teams",
       title: "It’s just you.",
@@ -87,9 +87,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "accent",
     x: 4,
-    y: 7,
+    y: 5,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       title: "",
       variant: "accent",
@@ -98,9 +98,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "rewards",
     x: 0,
-    y: 14,
+    y: 10,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       eyebrow: "1% Rewards",
       title: "Silver Status",
@@ -111,9 +111,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "rates",
     x: 4,
-    y: 14,
+    y: 10,
     w: 4,
-    h: 7,
+    h: 5,
     data: {
       eyebrow: "Your Rates",
       title: "Setup custom rates",
@@ -125,12 +125,11 @@ export const SEED_CELLS: SeedCell[] = [
       toggle: { label: "Negotiated rates", defaultOn: false, muted: true },
     },
   },
-  { i: "empty-1", x: 0, y: 21, w: 4, h: 7, data: null },
-  { i: "empty-2", x: 4, y: 21, w: 4, h: 7, data: null },
+  { i: "empty-1", x: 0, y: 15, w: 4, h: 5, data: null },
+  { i: "empty-2", x: 4, y: 15, w: 4, h: 5, data: null },
 
   // ── Third column ──
-  { i: "see-all", x: 8, y: 0, w: 4, h: 2, data: null, custom: "seeAll" },
-  { i: "company", x: 8, y: 2, w: 4, h: 4, data: null, custom: "company" },
-  { i: "unlock", x: 8, y: 6, w: 4, h: 9, data: null, custom: "unlock" },
-  { i: "integrations", x: 8, y: 15, w: 4, h: 6, data: null, custom: "integrations" },
+  { i: "company", x: 8, y: 0, w: 4, h: 2, data: null, custom: "company" },
+  { i: "unlock", x: 8, y: 2, w: 4, h: 5, data: null, custom: "unlock" },
+  { i: "integrations", x: 8, y: 7, w: 4, h: 6, data: null, custom: "integrations" },
 ];

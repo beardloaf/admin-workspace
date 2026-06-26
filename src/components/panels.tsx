@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   AlertCircle,
   Asterisk,
+  Plus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -39,11 +40,11 @@ export function SeeAllBar() {
 
 export function CompanyCard() {
   return (
-    <div className={cn(CARD, "flex items-center gap-4 px-7")}>
-      <span className="text-2xl font-extrabold italic tracking-tight text-[#1d3a8a]">
+    <div className={cn(CARD, "flex items-center gap-2.5 px-6")}>
+      <span className="text-base font-extrabold italic tracking-tight text-[#1d3a8a]">
         Turner
       </span>
-      <span className="flex-1 text-2xl font-bold tracking-tight text-neutral-900">
+      <span className="flex-1 truncate text-lg font-bold tracking-tight text-neutral-900">
         Turner Construction
       </span>
       <button
@@ -52,9 +53,9 @@ export function CompanyCard() {
         onPointerDown={stopDrag}
         onMouseDown={stopDrag}
         aria-label="Switch company"
-        className="no-drag text-neutral-700"
+        className="no-drag shrink-0 text-neutral-700"
       >
-        <ChevronDown className="h-6 w-6" strokeWidth={2.25} />
+        <ChevronDown className="h-5 w-5" strokeWidth={2.25} />
       </button>
     </div>
   );
@@ -64,27 +65,23 @@ export function CompanyCard() {
 
 export function UnlockCard() {
   return (
-    <div className={cn(CARD, "flex flex-col p-8")}>
-      <h2 className="text-[1.75rem] font-bold leading-tight tracking-tight text-neutral-900">
+    <div className={cn(CARD, "flex flex-col p-6")}>
+      <h2 className="text-xl font-bold leading-snug tracking-tight text-neutral-900">
         Unlock the full Engine experience
       </h2>
-      <p className="mt-3 text-[1.0625rem] leading-[1.45] text-neutral-500">
+      <p className="mt-2 text-sm leading-snug text-neutral-500">
         Your account manager is ready to optimize Engine for your team.
       </p>
 
-      <div className="flex-1" />
-
-      <div className="flex items-center gap-3">
-        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#3aa0e3] text-base font-bold text-white">
+      <div className="mt-4 flex items-center gap-3">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3aa0e3] text-sm font-bold text-white">
           MI
         </span>
         <span className="min-w-0">
-          <span className="block text-xl font-bold leading-tight text-neutral-900">
+          <span className="block text-base font-bold leading-tight text-neutral-900">
             Maya Iyer
           </span>
-          <span className="block text-[0.9375rem] text-neutral-500">
-            Account Manager
-          </span>
+          <span className="block text-xs text-neutral-500">Account Manager</span>
         </span>
       </div>
 
@@ -93,9 +90,9 @@ export function UnlockCard() {
         onClick={() => {}}
         onPointerDown={stopDrag}
         onMouseDown={stopDrag}
-        className="no-drag mt-6 flex w-full items-center justify-center gap-2.5 rounded-2xl bg-neutral-100 py-4 text-lg font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
+        className="no-drag mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-neutral-100 py-3 text-base font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
       >
-        <Calendar className="h-5 w-5" strokeWidth={2} />
+        <Calendar className="h-[18px] w-[18px]" strokeWidth={2} />
         Schedule call
       </button>
     </div>
@@ -133,11 +130,11 @@ function IntegrationRow({
   status: IntegrationStatus;
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-4">
-      <span className="flex h-9 w-9 shrink-0 items-center justify-center">
+    <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center">
         {icon}
       </span>
-      <span className="flex-1 text-xl font-semibold text-neutral-900">
+      <span className="flex-1 text-lg font-semibold text-neutral-900">
         {name}
       </span>
       <StatusBadge status={status} />
@@ -147,9 +144,9 @@ function IntegrationRow({
 
 export function IntegrationsCard() {
   return (
-    <div className={cn(CARD, "flex flex-col p-7")}>
-      <div className="flex items-center justify-between">
-        <span className="text-2xl font-bold tracking-tight text-neutral-900">
+    <div className={cn(CARD, "flex flex-col p-6")}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="whitespace-nowrap text-xl font-bold tracking-tight text-neutral-900">
           Connected Integrations
         </span>
         <button
@@ -157,18 +154,18 @@ export function IntegrationsCard() {
           onClick={() => {}}
           onPointerDown={stopDrag}
           onMouseDown={stopDrag}
-          className="no-drag rounded-full bg-neutral-100 px-4 py-2 text-[0.9375rem] font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+          className="no-drag shrink-0 rounded-full bg-neutral-100 px-4 py-1.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
         >
           See all
         </button>
       </div>
 
-      <div className="mt-5 flex flex-col gap-3">
+      <div className="mt-4 flex flex-col gap-3">
         <IntegrationRow
           name="BambooHR"
           status="error"
           icon={
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#73c41d] text-lg font-bold lowercase text-white">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#73c41d] text-base font-bold lowercase text-white">
               b
             </span>
           }
@@ -176,9 +173,20 @@ export function IntegrationsCard() {
         <IntegrationRow
           name="Okta"
           status="incomplete"
-          icon={<Asterisk className="h-7 w-7 text-neutral-900" strokeWidth={2.5} />}
+          icon={<Asterisk className="h-6 w-6 text-neutral-900" strokeWidth={2.5} />}
         />
       </div>
+
+      <button
+        type="button"
+        onClick={() => {}}
+        onPointerDown={stopDrag}
+        onMouseDown={stopDrag}
+        className="no-drag mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-neutral-100 py-3 text-base font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
+      >
+        <Plus className="h-[18px] w-[18px]" strokeWidth={2.25} />
+        New integration
+      </button>
     </div>
   );
 }
