@@ -29,15 +29,17 @@ export type SeedCell = {
   h: number;
 };
 
-// 12-column grid, three columns of four. Columns 1 & 2 hold the bento
-// modules; column 3 (x: 8) holds the account / integrations panels.
+// 12-column grid, three columns of four. rowHeight is 12px (margin 24px), so a
+// height unit ≈ 36px — fine enough for a short Turner bar that can expand.
+// Standard module = h10 (336px). Columns 1 & 2 hold the bento modules; column 3
+// (x: 8) holds the account / integrations panels.
 export const SEED_CELLS: SeedCell[] = [
   {
     i: "basic",
     x: 0,
     y: 0,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       eyebrow: "4 Departments",
       title: "Basic",
@@ -54,7 +56,7 @@ export const SEED_CELLS: SeedCell[] = [
     x: 4,
     y: 0,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       eyebrow: "3 Travel Policies",
       title: "Flexible",
@@ -70,12 +72,14 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "team",
     x: 0,
-    y: 5,
+    y: 10,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       eyebrow: "Travelers & Teams",
       title: "It’s just you.",
+      tone: "muted",
+      variant: "cta",
       body: (
         <>
           Even if you’re booking for everyone, <strong>add your people</strong>{" "}
@@ -87,9 +91,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "accent",
     x: 4,
-    y: 5,
+    y: 10,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       title: "",
       variant: "accent",
@@ -98,9 +102,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "rewards",
     x: 0,
-    y: 10,
+    y: 20,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       eyebrow: "1% Rewards",
       title: "Silver Status",
@@ -112,9 +116,9 @@ export const SEED_CELLS: SeedCell[] = [
   {
     i: "rates",
     x: 4,
-    y: 10,
+    y: 20,
     w: 4,
-    h: 5,
+    h: 10,
     data: {
       eyebrow: "Your Rates",
       title: "Setup custom rates",
@@ -126,11 +130,15 @@ export const SEED_CELLS: SeedCell[] = [
       toggle: { label: "Negotiated rates", defaultOn: false, muted: true },
     },
   },
-  { i: "empty-1", x: 0, y: 15, w: 4, h: 5, data: null },
-  { i: "empty-2", x: 4, y: 15, w: 4, h: 5, data: null },
+  { i: "empty-1", x: 0, y: 30, w: 4, h: 10, data: null },
+  { i: "empty-2", x: 4, y: 30, w: 4, h: 10, data: null },
 
   // ── Third column ──
   { i: "company", x: 8, y: 0, w: 4, h: 2, data: null, custom: "company" },
-  { i: "unlock", x: 8, y: 2, w: 4, h: 5, data: null, custom: "unlock" },
-  { i: "integrations", x: 8, y: 7, w: 4, h: 5, data: null, custom: "integrations" },
+  { i: "unlock", x: 8, y: 2, w: 4, h: 10, data: null, custom: "unlock" },
+  { i: "integrations", x: 8, y: 12, w: 4, h: 9, data: null, custom: "integrations" },
 ];
+
+// Collapsed / expanded heights for the Turner company switcher.
+export const COMPANY_COLLAPSED_H = 2;
+export const COMPANY_EXPANDED_H = 10;

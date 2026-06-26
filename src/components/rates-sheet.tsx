@@ -9,12 +9,21 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 
-type RatesSheetProps = {
+type DetailSheetProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  title: string;
+  description?: string;
+  showSave?: boolean;
 };
 
-export function RatesSheet({ open, onOpenChange }: RatesSheetProps) {
+export function DetailSheet({
+  open,
+  onOpenChange,
+  title,
+  description,
+  showSave = false,
+}: DetailSheetProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
@@ -22,22 +31,24 @@ export function RatesSheet({ open, onOpenChange }: RatesSheetProps) {
         className="flex flex-col rounded-l-2xl shadow-2xl sm:max-w-md"
       >
         <SheetHeader>
-          <SheetTitle>Your Rates</SheetTitle>
-          <SheetDescription>Set up your custom rates.</SheetDescription>
+          <SheetTitle>{title}</SheetTitle>
+          {description && <SheetDescription>{description}</SheetDescription>}
         </SheetHeader>
 
         {/* Blank body for now */}
         <div className="flex-1" />
 
-        <SheetFooter>
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            className="w-full rounded-2xl bg-black py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.01]"
-          >
-            Save
-          </button>
-        </SheetFooter>
+        {showSave && (
+          <SheetFooter>
+            <button
+              type="button"
+              onClick={() => onOpenChange(false)}
+              className="w-full rounded-2xl bg-black py-3.5 text-base font-semibold text-white transition-transform hover:scale-[1.01]"
+            >
+              Save
+            </button>
+          </SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   );

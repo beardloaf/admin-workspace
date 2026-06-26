@@ -11,8 +11,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Right-column panels: no hover scale (unlike the bento cards).
 const CARD_BASE =
-  "w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:scale-[1.02]";
+  "w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)]";
 // Most cards fill their grid cell; CARD_BASE alone hugs its content height.
 const CARD = "h-full " + CARD_BASE;
 
@@ -40,25 +41,46 @@ export function SeeAllBar() {
 
 /* ───────────── Company switcher ───────────── */
 
-export function CompanyCard() {
+export function CompanyCard({
+  expanded,
+  onToggle,
+}: {
+  expanded: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <div className={cn(CARD, "flex items-center gap-2.5 px-6")}>
-      <span className="text-base font-extrabold italic tracking-tight text-[#1d3a8a]">
-        Turner
-      </span>
-      <span className="flex-1 truncate text-lg font-bold tracking-tight text-neutral-900">
-        Turner Construction
-      </span>
-      <button
-        type="button"
-        onClick={() => {}}
-        onPointerDown={stopDrag}
-        onMouseDown={stopDrag}
-        aria-label="Switch company"
-        className="no-drag shrink-0 text-neutral-700"
-      >
-        <ChevronDown className="h-5 w-5" strokeWidth={2.25} />
-      </button>
+    <div
+      onClick={onToggle}
+      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-3")}
+    >
+      {/* Title stays at the top; expanding just adds white space below. */}
+      <div className="flex items-center gap-2.5">
+        <span className="text-base font-extrabold italic tracking-tight text-[#1d3a8a]">
+          Turner
+        </span>
+        <span className="flex-1 truncate text-lg font-bold tracking-tight text-neutral-900">
+          Turner Construction
+        </span>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggle();
+          }}
+          onPointerDown={stopDrag}
+          onMouseDown={stopDrag}
+          aria-label={expanded ? "Collapse" : "Expand"}
+          className="no-drag shrink-0 text-neutral-700"
+        >
+          <ChevronDown
+            className={cn(
+              "h-5 w-5 transition-transform duration-200",
+              expanded && "rotate-180",
+            )}
+            strokeWidth={2.25}
+          />
+        </button>
+      </div>
     </div>
   );
 }
@@ -203,11 +225,12 @@ export function Panel({ kind }: { kind: PanelKind }) {
   switch (kind) {
     case "seeAll":
       return <SeeAllBar />;
-    case "company":
-      return <CompanyCard />;
     case "unlock":
       return <UnlockCard />;
     case "integrations":
       return <IntegrationsCard />;
+    // "company" is rendered directly by the workspace (it needs expand state).
+    default:
+      return null;
   }
 }
