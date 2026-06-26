@@ -91,7 +91,7 @@ export function AccountManagerCard() {
       <div className="flex items-center gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://randomuser.me/api/portraits/women/68.jpg"
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=faces"
           alt="Maya Iyer"
           className="h-11 w-11 shrink-0 rounded-full object-cover"
         />

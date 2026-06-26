@@ -192,7 +192,7 @@ export function Workspace() {
       <header className="mb-8 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-neutral-900">
-            Workspace
+            Admin Workspace
           </h1>
           <p className="mt-1 text-sm text-neutral-500">
             Click a + to add a module. Drag modules to rearrange your dashboard.
