@@ -17,11 +17,8 @@ export function ReportingTile({ onOpen }: { onOpen: () => void }) {
       </span>
 
       <h2 className="mt-3 text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-400 transition-colors group-hover:text-neutral-900">
-        Reports
+        Recurring or one-time reports
       </h2>
-      <p className="mt-1 text-sm text-neutral-400 transition-colors group-hover:text-neutral-600">
-        Weekly &amp; monthly digests
-      </p>
 
       <div className="flex-1" />
 
