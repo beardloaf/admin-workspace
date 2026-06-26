@@ -17,7 +17,7 @@ export function ReportingTile({ onOpen }: { onOpen: () => void }) {
       </span>
 
       <h2 className="mt-3 text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-400 transition-colors group-hover:text-neutral-900">
-        Recurring or one-time reports
+        Recurring or <span className="whitespace-nowrap">one-time</span> digests
       </h2>
 
       <div className="flex-1" />
