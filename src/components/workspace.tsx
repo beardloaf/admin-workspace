@@ -12,7 +12,7 @@ import {
   IntegrationsCard,
 } from "@/components/panels";
 import { MembersTile } from "@/components/tiles/members-tile";
-import { DepartmentsTile } from "@/components/tiles/departments-tile";
+import { ReportingTile } from "@/components/tiles/reporting-tile";
 import { PoliciesTile } from "@/components/tiles/policies-tile";
 import { RatesTile } from "@/components/tiles/rates-tile";
 import { RewardsTile } from "@/components/tiles/rewards-tile";
@@ -118,6 +118,13 @@ export function Workspace() {
       showSave: true,
     });
   }
+  function openReporting() {
+    setDetail({
+      title: "Report templates",
+      description: "Set up weekly or monthly report templates.",
+      showSave: true,
+    });
+  }
   // The dashed "+" card and "See all features" both open this.
   function openAdd() {
     setDetail({
@@ -158,8 +165,8 @@ export function Workspace() {
     switch (cell.i) {
       case "members":
         return <MembersTile onAdd={openInvite} />;
-      case "departments":
-        return <DepartmentsTile />;
+      case "reporting":
+        return <ReportingTile onOpen={openReporting} />;
       case "policies":
         return <PoliciesTile onOpen={openPolicies} />;
       case "rates":
