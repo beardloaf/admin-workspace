@@ -21,18 +21,18 @@ export function RatesTile({ onOpen }: { onOpen: () => void }) {
         <StatusBadge status="attention" />
       </div>
 
-      <h2 className="mt-3 text-[2.125rem] font-medium leading-none tracking-[-0.02em] text-neutral-900">
+      <h2 className="mt-3 text-2xl font-medium leading-tight tracking-[-0.02em] text-neutral-900">
         Negotiated rates
       </h2>
 
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap gap-2">
         <AvisMark />
         <EnterpriseMark />
         <HertzMark />
       </div>
 
-      <p className="mt-4 text-[1.0625rem] text-neutral-500">
-        3 car providers connected ·{" "}
+      <p className="mt-4 text-sm text-neutral-500">
+        3 providers ·{" "}
         <span className="font-semibold text-neutral-900">add hotels</span>
       </p>
     </div>

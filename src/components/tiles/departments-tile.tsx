@@ -5,33 +5,25 @@ import { StatusBadge } from "@/components/ui-kit/status-badge";
 const EYEBROW =
   "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500";
 
-const DEPARTMENTS = [
-  "Field operations",
-  "Project management",
-  "Finance",
-  "Administration",
-  "Executive",
-];
-
 export function DepartmentsTile() {
   return (
     <div className={cn(BENTO_CARD, "flex flex-col p-6")}>
-      <div className="flex items-start justify-between gap-3">
-        <span className={EYEBROW}>Departments</span>
-        <StatusBadge status="complete" />
+      <div className="flex items-start justify-between gap-2">
+        <span className={EYEBROW}>Depts</span>
+        <StatusBadge status="complete" label="Done" />
       </div>
 
-      <h2 className="mt-3 text-[2.125rem] font-medium leading-none tracking-[-0.02em] text-neutral-900">
-        5 Departments
-      </h2>
+      <div className="flex-1" />
 
-      <ul className="mt-5 space-y-1.5">
-        {DEPARTMENTS.map((d) => (
-          <li key={d} className="text-[1.0625rem] text-neutral-600">
-            {d}
-          </li>
-        ))}
-      </ul>
+      <span className="text-[2.75rem] font-medium leading-none tracking-[-0.02em] text-neutral-900">
+        5
+      </span>
+      <span className="mt-1 text-[1.0625rem] font-medium text-neutral-700">
+        Departments
+      </span>
+      <p className="mt-2 text-sm leading-snug text-neutral-500">
+        Field ops, Finance +3
+      </p>
     </div>
   );
 }

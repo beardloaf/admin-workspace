@@ -16,14 +16,14 @@ export function RewardsTile() {
         <StatusBadge status="complete" />
       </div>
 
-      <h2 className="mt-3 text-[2.125rem] font-medium leading-none tracking-[-0.02em] bg-[linear-gradient(45deg,#000000,#9ca3af)] bg-clip-text text-transparent">
+      <h2 className="mt-3 text-2xl font-medium leading-tight tracking-[-0.02em] bg-[linear-gradient(45deg,#000000,#9ca3af)] bg-clip-text text-transparent">
         Silver Status
       </h2>
 
       <div className="mt-5">
         <div className="mb-1.5 flex items-center justify-between text-sm">
           <span className="text-neutral-500">Progress to Gold</span>
-          <span className="font-medium text-neutral-700">1,240 / 2,000 pts</span>
+          <span className="font-medium text-neutral-700">1,240 / 2,000</span>
         </div>
         <MiniBar value={62} />
       </div>

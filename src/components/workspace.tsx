@@ -17,6 +17,7 @@ import { PoliciesTile } from "@/components/tiles/policies-tile";
 import { RatesTile } from "@/components/tiles/rates-tile";
 import { RewardsTile } from "@/components/tiles/rewards-tile";
 import { SetupTile } from "@/components/tiles/setup-tile";
+import { AddTile } from "@/components/tiles/add-tile";
 import { DetailSheet } from "@/components/rates-sheet";
 import {
   SEED_CELLS,
@@ -56,6 +57,14 @@ export function Workspace() {
       title: "Travel Policies",
       description: "Adjust who each policy applies to.",
       showSave: true,
+    });
+  }
+
+  function openAdd() {
+    setDetail({
+      title: "Add a module",
+      description: "Pick a module to add to your workspace.",
+      showSave: false,
     });
   }
 
@@ -99,6 +108,8 @@ export function Workspace() {
         return <RewardsTile />;
       case "setup":
         return <SetupTile />;
+      case "add":
+        return <AddTile onAdd={openAdd} />;
       case "company":
         return (
           <CompanyCard

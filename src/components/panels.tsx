@@ -18,7 +18,7 @@ export function CompanyCard({
   return (
     <div
       onClick={onToggle}
-      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-2.5")}
+      className={cn(CARD, "flex cursor-pointer flex-col px-6 py-3")}
     >
       {/* Title stays at the top; expanding just adds white space below. */}
       <div className="flex items-center gap-2.5">

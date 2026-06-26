@@ -43,7 +43,7 @@ export function PoliciesTile({ onOpen }: { onOpen: () => void }) {
 
       <div className="mt-5">
         <div className="mb-1.5 flex items-center justify-between text-sm text-neutral-500">
-          <span>Travelers covered</span>
+          <span>Policy adherence</span>
           <span className="font-medium text-neutral-700">88%</span>
         </div>
         <MiniBar value={88} />
