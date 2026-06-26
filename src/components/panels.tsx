@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 
 const CARD =
-  "h-full w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)]";
+  "h-full w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:scale-[1.02]";
 
 function stopDrag(e: PointerEvent | MouseEvent) {
   e.stopPropagation();
@@ -73,7 +73,9 @@ export function UnlockCard() {
         Your account manager is ready to optimize Engine for your team.
       </p>
 
-      <div className="mt-4 flex items-center gap-3">
+      <div className="flex-1" />
+
+      <div className="flex items-center gap-3">
         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#3aa0e3] text-sm font-bold text-white">
           MI
         </span>

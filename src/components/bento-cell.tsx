@@ -9,6 +9,7 @@ type BentoCellProps = {
   id: string;
   data: ModuleData | null;
   onAdd: (id: string) => void;
+  onCtaOpen: (id: string) => void;
 };
 
 // Keep clicks on interactive controls from starting a grid drag.
@@ -67,7 +68,7 @@ const TONE_CLASS: Record<NonNullable<ModuleData["tone"]>, string> = {
   muted: "text-neutral-400",
 };
 
-export function BentoCell({ id, data, onAdd }: BentoCellProps) {
+export function BentoCell({ id, data, onAdd, onCtaOpen }: BentoCellProps) {
   // Empty placeholder module.
   if (!data) {
     return (
@@ -87,11 +88,12 @@ export function BentoCell({ id, data, onAdd }: BentoCellProps) {
 
   return (
     <div
+      onClick={isCta ? () => onCtaOpen(id) : undefined}
       className={cn(
-        "flex h-full w-full flex-col rounded-[24px] bg-white p-8",
+        "flex h-full w-full flex-col rounded-[24px] bg-white p-8 transition-transform duration-200",
         isCta
-          ? "border border-dashed border-neutral-300"
-          : cn("border border-neutral-200", MODULE_SHADOW),
+          ? "cursor-pointer border border-dashed border-neutral-300"
+          : cn("border border-neutral-200 hover:scale-[1.02]", MODULE_SHADOW),
       )}
     >
       <div className="flex items-start justify-between gap-4">
@@ -100,7 +102,7 @@ export function BentoCell({ id, data, onAdd }: BentoCellProps) {
             {data.eyebrow}
           </span>
         )}
-        {isCta && <PlusButton onClick={() => onAdd(id)} />}
+        {isCta && <PlusButton onClick={() => onCtaOpen(id)} />}
       </div>
 
       {/* Push title + body toward the bottom, like the reference. */}

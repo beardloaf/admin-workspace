@@ -131,5 +131,5 @@ export const SEED_CELLS: SeedCell[] = [
   // ── Third column ──
   { i: "company", x: 8, y: 0, w: 4, h: 2, data: null, custom: "company" },
   { i: "unlock", x: 8, y: 2, w: 4, h: 5, data: null, custom: "unlock" },
-  { i: "integrations", x: 8, y: 7, w: 4, h: 6, data: null, custom: "integrations" },
+  { i: "integrations", x: 8, y: 7, w: 4, h: 5, data: null, custom: "integrations" },
 ];

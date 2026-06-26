@@ -9,6 +9,7 @@ import {
 import { BentoCell } from "@/components/bento-cell";
 import { Panel, type PanelKind } from "@/components/panels";
 import { FeatureSheet } from "@/components/feature-sheet";
+import { RatesSheet } from "@/components/rates-sheet";
 import { FEATURE_MAP, type FeatureType } from "@/lib/features";
 import { SEED_CELLS, type ModuleData } from "@/lib/seed-modules";
 
@@ -29,6 +30,7 @@ export function Workspace() {
   const [cells, setCells] = useState<Cell[]>(SEED_CELLS);
   const [activeCellId, setActiveCellId] = useState<string | null>(null);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [ratesSheetOpen, setRatesSheetOpen] = useState(false);
 
   const { width, containerRef, mounted } = useContainerWidth({
     measureBeforeMount: true,
@@ -101,7 +103,12 @@ export function Workspace() {
                 {cell.custom ? (
                   <Panel kind={cell.custom} />
                 ) : (
-                  <BentoCell id={cell.i} data={cell.data} onAdd={handleAdd} />
+                  <BentoCell
+                    id={cell.i}
+                    data={cell.data}
+                    onAdd={handleAdd}
+                    onCtaOpen={() => setRatesSheetOpen(true)}
+                  />
                 )}
               </div>
             ))}
@@ -114,6 +121,8 @@ export function Workspace() {
         onOpenChange={setSheetOpen}
         onSelect={handleSelect}
       />
+
+      <RatesSheet open={ratesSheetOpen} onOpenChange={setRatesSheetOpen} />
     </>
   );
 }
