@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { PanelKind } from "@/components/panels";
 
 export type ModuleTone = "default" | "accent" | "muted";
 export type ModuleVariant = "filled" | "cta" | "accent";
@@ -20,20 +21,22 @@ export type ModuleData = {
 
 export type SeedCell = {
   i: string;
-  data: ModuleData | null; // null = empty "+" module
+  data: ModuleData | null; // null = empty "+" module (unless `custom` is set)
+  custom?: PanelKind; // bespoke third-column panel
   x: number;
   y: number;
   w: number;
   h: number;
 };
 
-// 12-column grid. Four rows of two, ending with two empty "+" modules.
+// 12-column grid, three columns of four. Columns 1 & 2 hold the bento
+// modules; column 3 (x: 8) holds the account / integrations panels.
 export const SEED_CELLS: SeedCell[] = [
   {
     i: "basic",
     x: 0,
     y: 0,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       eyebrow: "4 Departments",
@@ -48,9 +51,9 @@ export const SEED_CELLS: SeedCell[] = [
   },
   {
     i: "flexible",
-    x: 6,
+    x: 4,
     y: 0,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       eyebrow: "3 Travel Policies",
@@ -68,7 +71,7 @@ export const SEED_CELLS: SeedCell[] = [
     i: "team",
     x: 0,
     y: 7,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       eyebrow: "Travelers & Teams",
@@ -83,9 +86,9 @@ export const SEED_CELLS: SeedCell[] = [
   },
   {
     i: "accent",
-    x: 6,
+    x: 4,
     y: 7,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       title: "",
@@ -96,7 +99,7 @@ export const SEED_CELLS: SeedCell[] = [
     i: "rewards",
     x: 0,
     y: 14,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       eyebrow: "1% Rewards",
@@ -107,9 +110,9 @@ export const SEED_CELLS: SeedCell[] = [
   },
   {
     i: "rates",
-    x: 6,
+    x: 4,
     y: 14,
-    w: 6,
+    w: 4,
     h: 7,
     data: {
       eyebrow: "Your Rates",
@@ -122,6 +125,12 @@ export const SEED_CELLS: SeedCell[] = [
       toggle: { label: "Negotiated rates", defaultOn: false, muted: true },
     },
   },
-  { i: "empty-1", x: 0, y: 21, w: 6, h: 7, data: null },
-  { i: "empty-2", x: 6, y: 21, w: 6, h: 7, data: null },
+  { i: "empty-1", x: 0, y: 21, w: 4, h: 7, data: null },
+  { i: "empty-2", x: 4, y: 21, w: 4, h: 7, data: null },
+
+  // ── Third column ──
+  { i: "see-all", x: 8, y: 0, w: 4, h: 2, data: null, custom: "seeAll" },
+  { i: "company", x: 8, y: 2, w: 4, h: 4, data: null, custom: "company" },
+  { i: "unlock", x: 8, y: 6, w: 4, h: 9, data: null, custom: "unlock" },
+  { i: "integrations", x: 8, y: 15, w: 4, h: 6, data: null, custom: "integrations" },
 ];

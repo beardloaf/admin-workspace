@@ -108,7 +108,7 @@ export function BentoCell({ id, data, onAdd }: BentoCellProps) {
 
       <h2
         className={cn(
-          "text-[3.25rem] font-normal leading-[1.02] tracking-[-0.02em]",
+          "text-[2.125rem] font-normal leading-[1.05] tracking-[-0.02em]",
           toneClass,
         )}
       >

@@ -7,6 +7,7 @@ import {
   type Layout,
 } from "react-grid-layout";
 import { BentoCell } from "@/components/bento-cell";
+import { Panel, type PanelKind } from "@/components/panels";
 import { FeatureSheet } from "@/components/feature-sheet";
 import { FEATURE_MAP, type FeatureType } from "@/lib/features";
 import { SEED_CELLS, type ModuleData } from "@/lib/seed-modules";
@@ -17,6 +18,7 @@ import "react-resizable/css/styles.css";
 type Cell = {
   i: string;
   data: ModuleData | null;
+  custom?: PanelKind;
   x: number;
   y: number;
   w: number;
@@ -90,14 +92,17 @@ export function Workspace() {
             rowHeight={48}
             margin={[24, 24]}
             containerPadding={[0, 0]}
-            isBounded={false}
             resizeConfig={{ enabled: false }}
             dragConfig={{ enabled: true, cancel: ".no-drag" }}
             onLayoutChange={handleLayoutChange}
           >
             {cells.map((cell) => (
               <div key={cell.i}>
-                <BentoCell id={cell.i} data={cell.data} onAdd={handleAdd} />
+                {cell.custom ? (
+                  <Panel kind={cell.custom} />
+                ) : (
+                  <BentoCell id={cell.i} data={cell.data} onAdd={handleAdd} />
+                )}
               </div>
             ))}
           </ResponsiveGridLayout>

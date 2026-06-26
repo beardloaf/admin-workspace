@@ -1,0 +1,201 @@
+"use client";
+
+import { type PointerEvent, type MouseEvent } from "react";
+import {
+  ChevronDown,
+  Calendar,
+  AlertTriangle,
+  AlertCircle,
+  Asterisk,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const CARD =
+  "h-full w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)]";
+
+function stopDrag(e: PointerEvent | MouseEvent) {
+  e.stopPropagation();
+}
+
+/* ───────────── See all features ───────────── */
+
+export function SeeAllBar() {
+  return (
+    <div className="flex h-full w-full items-center justify-end">
+      <button
+        type="button"
+        onClick={() => {}}
+        onPointerDown={stopDrag}
+        onMouseDown={stopDrag}
+        className="no-drag rounded-full bg-black px-7 py-3.5 text-lg font-semibold text-white transition-transform hover:scale-[1.02]"
+      >
+        See all features
+      </button>
+    </div>
+  );
+}
+
+/* ───────────── Company switcher ───────────── */
+
+export function CompanyCard() {
+  return (
+    <div className={cn(CARD, "flex items-center gap-4 px-7")}>
+      <span className="text-2xl font-extrabold italic tracking-tight text-[#1d3a8a]">
+        Turner
+      </span>
+      <span className="flex-1 text-2xl font-bold tracking-tight text-neutral-900">
+        Turner Construction
+      </span>
+      <button
+        type="button"
+        onClick={() => {}}
+        onPointerDown={stopDrag}
+        onMouseDown={stopDrag}
+        aria-label="Switch company"
+        className="no-drag text-neutral-700"
+      >
+        <ChevronDown className="h-6 w-6" strokeWidth={2.25} />
+      </button>
+    </div>
+  );
+}
+
+/* ───────────── Unlock the full Engine experience ───────────── */
+
+export function UnlockCard() {
+  return (
+    <div className={cn(CARD, "flex flex-col p-8")}>
+      <h2 className="text-[1.75rem] font-bold leading-tight tracking-tight text-neutral-900">
+        Unlock the full Engine experience
+      </h2>
+      <p className="mt-3 text-[1.0625rem] leading-[1.45] text-neutral-500">
+        Your account manager is ready to optimize Engine for your team.
+      </p>
+
+      <div className="flex-1" />
+
+      <div className="flex items-center gap-3">
+        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#3aa0e3] text-base font-bold text-white">
+          MI
+        </span>
+        <span className="min-w-0">
+          <span className="block text-xl font-bold leading-tight text-neutral-900">
+            Maya Iyer
+          </span>
+          <span className="block text-[0.9375rem] text-neutral-500">
+            Account Manager
+          </span>
+        </span>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {}}
+        onPointerDown={stopDrag}
+        onMouseDown={stopDrag}
+        className="no-drag mt-6 flex w-full items-center justify-center gap-2.5 rounded-2xl bg-neutral-100 py-4 text-lg font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
+      >
+        <Calendar className="h-5 w-5" strokeWidth={2} />
+        Schedule call
+      </button>
+    </div>
+  );
+}
+
+/* ───────────── Connected Integrations ───────────── */
+
+type IntegrationStatus = "error" | "incomplete";
+
+function StatusBadge({ status }: { status: IntegrationStatus }) {
+  if (status === "error") {
+    return (
+      <span className="flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1.5 text-[0.9375rem] font-medium text-orange-700">
+        <AlertTriangle className="h-[18px] w-[18px]" strokeWidth={2} />
+        Error
+      </span>
+    );
+  }
+  return (
+    <span className="flex items-center gap-1.5 rounded-full bg-sky-100 px-3 py-1.5 text-[0.9375rem] font-medium text-sky-700">
+      <AlertCircle className="h-[18px] w-[18px]" strokeWidth={2} />
+      Incomplete
+    </span>
+  );
+}
+
+function IntegrationRow({
+  icon,
+  name,
+  status,
+}: {
+  icon: React.ReactNode;
+  name: string;
+  status: IntegrationStatus;
+}) {
+  return (
+    <div className="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-4">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center">
+        {icon}
+      </span>
+      <span className="flex-1 text-xl font-semibold text-neutral-900">
+        {name}
+      </span>
+      <StatusBadge status={status} />
+    </div>
+  );
+}
+
+export function IntegrationsCard() {
+  return (
+    <div className={cn(CARD, "flex flex-col p-7")}>
+      <div className="flex items-center justify-between">
+        <span className="text-2xl font-bold tracking-tight text-neutral-900">
+          Connected Integrations
+        </span>
+        <button
+          type="button"
+          onClick={() => {}}
+          onPointerDown={stopDrag}
+          onMouseDown={stopDrag}
+          className="no-drag rounded-full bg-neutral-100 px-4 py-2 text-[0.9375rem] font-medium text-neutral-900 transition-colors hover:bg-neutral-200"
+        >
+          See all
+        </button>
+      </div>
+
+      <div className="mt-5 flex flex-col gap-3">
+        <IntegrationRow
+          name="BambooHR"
+          status="error"
+          icon={
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#73c41d] text-lg font-bold lowercase text-white">
+              b
+            </span>
+          }
+        />
+        <IntegrationRow
+          name="Okta"
+          status="incomplete"
+          icon={<Asterisk className="h-7 w-7 text-neutral-900" strokeWidth={2.5} />}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ───────────── kind → component ───────────── */
+
+export type PanelKind = "seeAll" | "company" | "unlock" | "integrations";
+
+export function Panel({ kind }: { kind: PanelKind }) {
+  switch (kind) {
+    case "seeAll":
+      return <SeeAllBar />;
+    case "company":
+      return <CompanyCard />;
+    case "unlock":
+      return <UnlockCard />;
+    case "integrations":
+      return <IntegrationsCard />;
+  }
+}
