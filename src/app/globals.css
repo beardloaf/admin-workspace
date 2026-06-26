@@ -141,20 +141,12 @@
 /* Smooth reflow when other modules move to fill a gap */
 .react-grid-item:not(.react-grid-placeholder) {
   transition: transform 200ms ease, width 200ms ease, height 200ms ease;
-  cursor: grab;
   /* Prevent text selection from hijacking the drag gesture on dense cards */
   user-select: none;
   -webkit-user-select: none;
 }
 
-/* Interactive controls keep a normal pointer */
-.react-grid-item button,
-.react-grid-item [role="switch"] {
-  cursor: pointer;
-}
-
 .react-grid-item.react-draggable-dragging {
   transition: none;
   z-index: 20;
-  cursor: grabbing;
 }

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import type { PanelKind } from "@/components/panels";
 
-export type ModuleTone = "default" | "accent" | "muted";
+export type ModuleTone = "default" | "accent" | "muted" | "gradient";
 export type ModuleVariant = "filled" | "cta" | "accent";
 
 export type ModuleToggle = {
@@ -104,6 +104,7 @@ export const SEED_CELLS: SeedCell[] = [
     data: {
       eyebrow: "1% Rewards",
       title: "Silver Status",
+      tone: "gradient",
       body: <>Every account starts here and we let your team earn points.</>,
       toggle: { label: "Share with employees", defaultOn: true },
     },

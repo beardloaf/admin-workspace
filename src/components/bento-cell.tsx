@@ -66,6 +66,9 @@ const TONE_CLASS: Record<NonNullable<ModuleData["tone"]>, string> = {
   default: "text-neutral-900",
   accent: "text-[#16a34a]",
   muted: "text-neutral-400",
+  // black -> grey along a 45° angle, painted onto the text
+  gradient:
+    "bg-[linear-gradient(45deg,#000000,#9ca3af)] bg-clip-text text-transparent",
 };
 
 export function BentoCell({ id, data, onAdd, onCtaOpen }: BentoCellProps) {
@@ -92,13 +95,18 @@ export function BentoCell({ id, data, onAdd, onCtaOpen }: BentoCellProps) {
       className={cn(
         "flex h-full w-full flex-col rounded-[24px] bg-white p-8 transition-transform duration-200",
         isCta
-          ? "cursor-pointer border border-dashed border-neutral-300"
+          ? "group cursor-pointer border border-dashed border-neutral-300"
           : cn("border border-neutral-200 hover:scale-[1.02]", MODULE_SHADOW),
       )}
     >
       <div className="flex items-start justify-between gap-4">
         {data.eyebrow && (
-          <span className="text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500">
+          <span
+            className={cn(
+              "text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-neutral-500 transition-colors",
+              isCta && "group-hover:text-neutral-900",
+            )}
+          >
             {data.eyebrow}
           </span>
         )}
@@ -110,15 +118,21 @@ export function BentoCell({ id, data, onAdd, onCtaOpen }: BentoCellProps) {
 
       <h2
         className={cn(
-          "text-[2.125rem] font-normal leading-[1.05] tracking-[-0.02em]",
+          "text-[2.125rem] font-medium leading-[1.05] tracking-[-0.02em] transition-colors",
           toneClass,
+          isCta && "group-hover:text-black",
         )}
       >
         {data.title}
       </h2>
 
       {data.body && (
-        <p className="mt-4 max-w-[42ch] text-[1.0625rem] leading-[1.45] text-neutral-600 [&_strong]:font-semibold [&_strong]:text-neutral-900">
+        <p
+          className={cn(
+            "mt-4 max-w-[42ch] text-[1.0625rem] leading-[1.45] text-neutral-600 transition-colors [&_strong]:font-semibold [&_strong]:text-neutral-900",
+            isCta && "group-hover:text-neutral-900",
+          )}
+        >
           {data.body}
         </p>
       )}
@@ -127,12 +141,19 @@ export function BentoCell({ id, data, onAdd, onCtaOpen }: BentoCellProps) {
         <div className="-mx-8 mt-7 flex items-center justify-between border-t border-neutral-200 px-8 pt-5">
           <span
             className={cn(
-              "flex items-center gap-1.5 text-[0.9375rem] font-semibold",
+              "flex items-center gap-1.5 text-[0.9375rem] font-semibold transition-colors",
               data.toggle.muted ? "text-neutral-400" : "text-neutral-900",
+              isCta && "group-hover:text-neutral-900",
             )}
           >
             {data.toggle.label}
-            <Info className="h-[18px] w-[18px] text-neutral-400" strokeWidth={2} />
+            <Info
+              className={cn(
+                "h-[18px] w-[18px] text-neutral-400 transition-colors",
+                isCta && "group-hover:text-neutral-700",
+              )}
+              strokeWidth={2}
+            />
           </span>
           <Toggle defaultOn={data.toggle.defaultOn} />
         </div>

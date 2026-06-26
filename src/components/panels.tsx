@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const CARD =
-  "h-full w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:scale-[1.02]";
+const CARD_BASE =
+  "w-full rounded-[24px] border border-neutral-200 bg-white shadow-[0_30px_80px_-20px_rgba(15,23,42,0.18)] transition-transform duration-200 hover:scale-[1.02]";
+// Most cards fill their grid cell; CARD_BASE alone hugs its content height.
+const CARD = "h-full " + CARD_BASE;
 
 function stopDrag(e: PointerEvent | MouseEvent) {
   e.stopPropagation();
@@ -66,7 +68,7 @@ export function CompanyCard() {
 export function UnlockCard() {
   return (
     <div className={cn(CARD, "flex flex-col p-6")}>
-      <h2 className="text-xl font-bold leading-snug tracking-tight text-neutral-900">
+      <h2 className="text-xl font-extrabold leading-snug tracking-tight text-neutral-900">
         Unlock the full Engine experience
       </h2>
       <p className="mt-2 text-sm leading-snug text-neutral-500">
@@ -146,9 +148,9 @@ function IntegrationRow({
 
 export function IntegrationsCard() {
   return (
-    <div className={cn(CARD, "flex flex-col p-6")}>
+    <div className={cn(CARD_BASE, "flex flex-col p-6")}>
       <div className="flex items-center justify-between gap-2">
-        <span className="whitespace-nowrap text-xl font-bold tracking-tight text-neutral-900">
+        <span className="whitespace-nowrap text-xl font-extrabold tracking-tight text-neutral-900">
           Connected Integrations
         </span>
         <button
